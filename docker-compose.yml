@@ -8,10 +8,10 @@ services:
     command: gunicorn -b 0.0.0.0:5000 user.wsgi:app
     env_file:
       - ./.flaskenv
-    environment:
-      - DATABASE_URI=mongodb://localhost:27017/user
-      - CELERY_BROKER_URL=redis://localhost:6379/1
-      - CELERY_RESULT_BACKEND_URL=redis://localhost:6379/2
+#    environment:
+#      - DATABASE_URI=mongodb://localhost:27017/user
+#      - CELERY_BROKER_URL=redis://localhost:6379/1
+#      - CELERY_RESULT_BACKEND_URL=redis://localhost:6379/2
     volumes:
       - ./user:/code/user
       - ./db/:/db/
