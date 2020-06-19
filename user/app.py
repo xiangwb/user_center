@@ -3,7 +3,6 @@ from flask import Flask
 from user import auth, api
 from user.extensions import jwt, db, apispec, logger, celery, limiter
 from user.request_handler import register_error_handler
-from elasticsearch import Elasticsearch
 
 
 def create_app(testing=False, cli=False):
@@ -29,11 +28,13 @@ def configure_extensions(app, cli):
     """
     if cli is True:
         app.config['MONGODB_SETTINGS'] = {
-            'host': 'mongodb://localhost:27017/user_tmp'
+            'db': app.config['DATABASE_DB'],
+            'host': app.config['DATABASE_URI']
         }
     else:
         # 建立mongo的数据库连接，mongo的连接只需要connect就行
         app.config['MONGODB_SETTINGS'] = {
+            'db': app.config['DATABASE_DB'],
             'host': app.config['DATABASE_URI']
         }
 
@@ -41,7 +42,7 @@ def configure_extensions(app, cli):
     jwt.init_app(app)
     limiter.init_app(app)
     logger.init_loggers(app)
-    app.es = Elasticsearch(app.config['ELASTICSEARCH_URL'])
+    # app.es = Elasticsearch(app.config['ELASTICSEARCH_URL'])
 
 
 def configure_apispec(app):

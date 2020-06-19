@@ -8,10 +8,12 @@ from flask_jwt_extended import (
     get_raw_jwt,
 )
 
-from user.models import User
-from user.extensions import pwd_context, jwt, apispec
 from user.auth.helpers import revoke_token, is_token_revoked, add_token_to_database
+from user.extensions import pwd_context, jwt, apispec
+from user.loggers import get_logger
+from user.models import User
 
+logger = get_logger('user', 'user')
 
 blueprint = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -64,6 +66,7 @@ def login():
         return jsonify({"msg": "Missing username or password"}), 400
 
     user = User.objects.filter(username=username).first()
+    logger.debug("user:{}".format(user))
     if user is None or not pwd_context.verify(password, user.password):
         return jsonify({"msg": "Bad credentials"}), 400
 
