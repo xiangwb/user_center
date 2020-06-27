@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_admin import Admin
 
 from user import auth, api
 from user.extensions import jwt, db, apispec, logger, celery, limiter
@@ -19,6 +20,7 @@ def create_app(testing=False, cli=False):
     register_request_handler(app)
     register_blueprints(app)
     init_celery(app)
+    init_admin(app)
 
     return app
 
@@ -104,3 +106,8 @@ def init_celery(app=None):
 
     celery.Task = ContextTask
     return celery
+
+
+def init_admin(app=None):
+    app = app or create_app()
+    Admin(app, name='bubble', template_mode='bootstrap3')
