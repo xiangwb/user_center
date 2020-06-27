@@ -15,7 +15,7 @@ from user.models import User
 
 logger = get_logger('user', 'user')
 
-blueprint = Blueprint("auth", __name__, url_prefix="/auth")
+blueprint = Blueprint("auth", __name__, url_prefix="/api/v1")
 
 
 @blueprint.route("/login", methods=["POST"])
