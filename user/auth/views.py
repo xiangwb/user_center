@@ -18,7 +18,7 @@ logger = get_logger('user', 'user')
 blueprint = Blueprint("auth", __name__, url_prefix="/api/v1")
 
 
-@blueprint.route("/login", methods=["POST"])
+@blueprint.route("/login/", methods=["POST"])
 def login():
     """Authenticate user and return tokens
 
@@ -79,7 +79,7 @@ def login():
     return jsonify(ret), 200
 
 
-@blueprint.route("/refresh", methods=["POST"])
+@blueprint.route("/refresh/", methods=["POST"])
 @jwt_refresh_token_required
 def refresh():
     """Get an access token from a refresh token
@@ -115,7 +115,7 @@ def refresh():
     return jsonify(ret), 200
 
 
-@blueprint.route("/revoke_access", methods=["DELETE"])
+@blueprint.route("/revoke_access/", methods=["DELETE"])
 @jwt_required
 def revoke_access_token():
     """Revoke an access token
@@ -145,7 +145,7 @@ def revoke_access_token():
     return jsonify({"message": "token revoked"}), 200
 
 
-@blueprint.route("/revoke_refresh", methods=["DELETE"])
+@blueprint.route("/revoke_refresh/", methods=["DELETE"])
 @jwt_refresh_token_required
 def revoke_refresh_token():
     """Revoke a refresh token, used mainly for logout
