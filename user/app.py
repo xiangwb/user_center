@@ -3,7 +3,9 @@ from flask_admin import Admin
 
 from user import auth, api
 from user.extensions import jwt, db, apispec, logger, celery, limiter
+from user.models import User, TokenBlacklist
 from user.request_handler import register_error_handler
+from flask_admin.contrib.mongoengine import ModelView
 
 
 def create_app(testing=False, cli=False):
@@ -110,4 +112,6 @@ def init_celery(app=None):
 
 def init_admin(app=None):
     app = app or create_app()
-    Admin(app, name='bubble', template_mode='bootstrap3')
+    admin = Admin(app, name='bubble', template_mode='bootstrap3')
+    admin.add_view(ModelView(User))
+    admin.add_view(ModelView(TokenBlacklist))
