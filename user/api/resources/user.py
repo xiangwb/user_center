@@ -14,7 +14,7 @@ class UserSchema(ma.Schema):
     username = ma.String(required=True)
     email = ma.String(required=False)
     phone = ma.String(required=False)
-    roles = ma.List(required=False)
+    # roles = ma.List(required=False)
     gender = ma.String(required=False)
     weixin = ma.String(required=False)
     qq = ma.String(required=False)
