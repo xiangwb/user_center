@@ -27,5 +27,5 @@ limiter = Limiter(key_func=get_remote_address, default_limits=["10000/day, 2000/
 
 
 @jwt.unauthorized_loader
-def my_unauthorized_loader():
-    return format_response('', 'Missing Authorization Header', 401)
+def my_unauthorized_loader(e):
+    return format_response(e, 'Missing Authorization Header', 401)
