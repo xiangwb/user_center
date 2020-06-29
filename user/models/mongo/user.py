@@ -11,17 +11,17 @@ class User(CommonDocument, SearchableMixin):
     email = mongo.StringField(required=False, max_length=80)
     password = mongo.StringField(required=True, max_length=255)
     active = mongo.BooleanField(default=True)
-    phone = mongo.StringField(max_length=16, unique=True, required=False)
+    phone = mongo.StringField(max_length=16, unique=True, required=False, default='')
     # roles = mongo.ListField()
     gender = mongo.StringField(choices=['F', 'M', ''], default='')
     weixin = mongo.StringField(default='', max_length=64)
     qq = mongo.StringField(default='', max_length=64)
-    birthday = mongo.DateField(required=False)
-    country = mongo.StringField(required=False, max_length=128)  # 国家
-    city = mongo.StringField(required=False, max_length=128)  # 城市
+    birthday = mongo.DateField(required=False, default='')
+    country = mongo.StringField(required=False, max_length=128, default='')  # 国家
+    city = mongo.StringField(required=False, max_length=128, default='')  # 城市
     graduated_school = mongo.StringField(required=False, max_length=128)  # 毕业学校
-    company = mongo.StringField(required=False, max_length=128)  # 就职公司
-    title = mongo.StringField(required=False, max_length=64)  # 职位
+    company = mongo.StringField(required=False, max_length=128, default='')  # 就职公司
+    title = mongo.StringField(required=False, max_length=64, default='')  # 职位
 
     # __searchable__ = ['username', 'email']  # 定义需要es搜索的字段，不定义则不需要es搜索功能
 
