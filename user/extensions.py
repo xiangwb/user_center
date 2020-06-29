@@ -30,3 +30,8 @@ limiter = Limiter(key_func=get_remote_address, default_limits=["10000/day, 2000/
 @jwt.unauthorized_loader
 def my_unauthorized_loader(e):
     return jsonify(format_response('', 'Missing Authorization Header', 401))
+
+
+@jwt.invalid_token_loader
+def my_invalid_token_loader(e):
+    return jsonify(format_response('', "Bad Authorization header. Expected value 'Bearer <JWT>'", 422))
