@@ -18,7 +18,7 @@ class UserSchema(ma.Schema):
     gender = ma.String(required=False)
     weixin = ma.String(required=False)
     qq = ma.String(required=False)
-    birthday = ma.DateField(required=False)
+    birthday = ma.Date(required=False)
     country = ma.String(required=False)  # 国家
     city = ma.String(required=False)  # 城市
     graduated_school = ma.String(required=False)  # 毕业学校
