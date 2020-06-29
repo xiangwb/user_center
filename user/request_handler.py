@@ -14,7 +14,6 @@
 """
 import traceback
 
-
 from user.extensions import logger
 from user.utils.response import format_response
 
@@ -89,7 +88,6 @@ def handle_404(e):
     #     rsp.update(e.description)
     # return jsonify(**rsp), 404
     return format_response(str(e), 'Not Found', 404)
-
 
 
 def handle_405(e):
