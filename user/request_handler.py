@@ -108,4 +108,4 @@ def handle_exception(e):
     """Called when exception occurred"""
     traceback.print_exc()
     logger.api_logger.error(traceback.format_exc())
-    return jsonify(str(e)), 500
+    return jsonify(str(e.args)), 500
