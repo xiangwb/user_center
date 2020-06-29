@@ -101,7 +101,7 @@ class UserResource(Resource):
 
     method_decorators = [jwt_required]
 
-    def get(self, username):
+    def get(self, id):
         schema = UserSchema()
         try:
             user = User.objects.get(id=id)
@@ -109,7 +109,7 @@ class UserResource(Resource):
         except (mg.DoesNotExist, mg.MultipleObjectsReturned):
             abort(404, {'msg': '用户不存在'})
 
-    def put(self, username):
+    def put(self, id):
         schema = UserSchema(partial=True)
         try:
             user = User.objects.get(id=id)
@@ -120,7 +120,7 @@ class UserResource(Resource):
         except (mg.DoesNotExist, mg.MultipleObjectsReturned):
             abort(404, {'msg': '用户不存在'})
 
-    def delete(self, username):
+    def delete(self, id):
         try:
             User.objects.get(id=id).delete()
             return {"msg": "user deleted"}
