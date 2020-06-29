@@ -7,7 +7,7 @@ import mongoengine as mg
 from user.models import User
 from user.extensions import ma
 from user.commons.pagination import Pagination
-from user.utils import format_response
+from user.utils.response import format_response
 
 
 class UserSchema(ma.Schema):

@@ -16,7 +16,7 @@ import traceback
 
 
 from user.extensions import logger
-from user.utils import format_response
+from user.utils.response import format_response
 
 
 def register_error_handler(app):
