@@ -14,7 +14,7 @@ class User(CommonDocument, SearchableMixin):
     phone = mongo.StringField(max_length=16, unique=True, required=False)
     # roles = mongo.ListField()
     gender = mongo.StringField(choices=['F', 'M', ''], default='')
-    wechat = mongo.StringField(default='', max_length=64)
+    weixin = mongo.StringField(default='', max_length=64)
     qq = mongo.StringField(default='', max_length=64)
     birthday = mongo.DateField(required=False)
     country = mongo.StringField(required=False, max_length=128)  # 国家
