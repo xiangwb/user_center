@@ -14,10 +14,9 @@
 """
 import traceback
 
-from flask import jsonify, request
 
 from user.extensions import logger
-from utils.response import format_response
+from user.utils import format_response
 
 
 def register_error_handler(app):

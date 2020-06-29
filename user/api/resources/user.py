@@ -1,5 +1,4 @@
 import mongoengine
-import datetime
 from flask import request, abort
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required
@@ -8,7 +7,7 @@ import mongoengine as mg
 from user.models import User
 from user.extensions import ma
 from user.commons.pagination import Pagination
-from utils.response import format_response
+from user.utils import format_response
 
 
 class UserSchema(ma.Schema):

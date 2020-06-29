@@ -12,7 +12,7 @@ from user.auth.helpers import revoke_token, is_token_revoked, add_token_to_datab
 from user.extensions import pwd_context, jwt, apispec
 from user.loggers import get_logger
 from user.models import User
-from utils.response import format_response
+from user.utils import format_response
 
 logger = get_logger('user', 'user')
 
