@@ -12,7 +12,7 @@ class User(CommonDocument, SearchableMixin):
     password = mongo.StringField(required=True, max_length=255)
     active = mongo.BooleanField(default=True)
     phone = mongo.StringField(max_length=16, unique=True, required=False)
-    roles = mongo.ListField()
+    # roles = mongo.ListField()
     gender = mongo.StringField(choices=['F', 'M', ''], default='')
     wechat = mongo.StringField(default='', max_length=64)
     qq = mongo.StringField(default='', max_length=64)
