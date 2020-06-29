@@ -8,6 +8,7 @@ import mongoengine as mg
 from user.models import User
 from user.extensions import ma
 from user.commons.pagination import Pagination
+from utils.response import format_response
 
 
 class UserSchema(ma.Schema):
@@ -26,7 +27,6 @@ class UserSchema(ma.Schema):
     graduated_school = ma.String(default='')  # 毕业学校
     company = ma.String(default='')  # 就职公司
     title = ma.String(default='')  # 职位
-
 
 
 class UserResource(Resource):
@@ -105,9 +105,9 @@ class UserResource(Resource):
         schema = UserSchema()
         try:
             user = User.objects.get(id=id)
-            return {"user": schema.dump(user)}
+            return format_response(schema.dump(user), "get user detail success", 200)
         except (mg.DoesNotExist, mg.MultipleObjectsReturned):
-            abort(404, {'msg': '用户不存在'})
+            return format_response('', 'user is not exist', 404)
 
     def put(self, id):
         schema = UserSchema(partial=True)
@@ -175,15 +175,18 @@ class UserList(Resource):
         schema = UserSchema(many=True)
         query = User.objects.all()
         objs, page = Pagination(query).paginate(schema)
-        return {'response': objs, 'page': page}
+        return format_response(objs, 'get user list success', 200, page=page)
 
     def post(self):
         try:
             schema = UserSchema()
             data = schema.load(request.json)
             user = User.objects.create(**data)
-            return {"msg": "user created", "user": schema.dump(user)}, 201
+            # return {"msg": "user created", "user": schema.dump(user)}, 201
+            return format_response(schema.dump(user), 'user created', 201)
         except mongoengine.errors.NotUniqueError:
-            abort(403, {'msg': '手机号码已存在'})
+            # abort(403, {'msg': '手机号码已存在'})
+            return format_response('', 'user exists', 400)
         except Exception as e:
-            abort(500, {"msg": e.args})
+            # abort(500, {"msg": e.args})
+            return format_response('', 'server error', 500)
