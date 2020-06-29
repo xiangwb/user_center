@@ -1,7 +1,7 @@
 FLASK_ENV=development
 FLASK_APP=user.app:create_app
 SECRET_KEY=changeme
-DATABASE_URI=mongodb://192.168.191.128:27017/admin
+DATABASE_URI=mongodb://192.168.112.128:27017/admin
 DATABASE_DB=bubble
 CELERY_BROKER_URL=redis://localhost:6379/1
 CELERY_RESULT_BACKEND_URL=redis://localhost:6379/2

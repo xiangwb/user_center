@@ -1,3 +1,4 @@
+import mongoengine
 from flask import request, abort
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required
@@ -12,7 +13,7 @@ class UserSchema(ma.Schema):
     id = ma.String(dump_only=True)
     password = ma.String(load_only=True, required=True)
     username = ma.String(required=True)
-    email = ma.String( default='')
+    email = ma.String(default='')
     phone = ma.String(default='')
     # roles = ma.List(required=False)
     gender = ma.String(default='')
@@ -175,7 +176,12 @@ class UserList(Resource):
         return {'response': objs, 'page': page}
 
     def post(self):
-        schema = UserSchema()
-        data = schema.load(request.json)
-        user = User.objects.create(**data)
-        return {"msg": "user created", "user": schema.dump(user)}, 201
+        try:
+            schema = UserSchema()
+            data = schema.load(request.json)
+            user = User.objects.create(**data)
+            return {"msg": "user created", "user": schema.dump(user)}, 201
+        except mongoengine.errors.NotUniqueError:
+            abort(403, {'msg': '手机号码已存在'})
+        except Exception as e:
+            abort(500, {"msg": e.args})
