@@ -11,7 +11,7 @@ blueprint = Blueprint("api", __name__, url_prefix="/api/v1")
 api = Api(blueprint)
 
 
-api.add_resource(UserResource, "/users/<string:username>")
+api.add_resource(UserResource, "/users/<string:id>")
 api.add_resource(UserList, "/users/")
 
 
