@@ -27,10 +27,6 @@ class UserSchema(ma.Schema):
     company = ma.String(default='')  # 就职公司
     title = ma.String(default='')  # 职位
 
-    @ma.validates
-    def validate_birthday(self, value):
-        if value:
-            datetime.datetime.strptime(value, "%Y-%m-%d")
 
 
 class UserResource(Resource):
