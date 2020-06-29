@@ -1,4 +1,5 @@
 import mongoengine
+import datetime
 from flask import request, abort
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required
@@ -19,12 +20,17 @@ class UserSchema(ma.Schema):
     gender = ma.String(default='')
     weixin = ma.String(default='')
     qq = ma.String(default='')
-    birthday = ma.Date(default='')
+    birthday = ma.Date(required=False)
     country = ma.String(default='')  # 国家
     city = ma.String(default='')  # 城市
     graduated_school = ma.String(default='')  # 毕业学校
     company = ma.String(default='')  # 就职公司
     title = ma.String(default='')  # 职位
+
+    @ma.validates
+    def validate_birthday(self, value):
+        if value:
+            datetime.datetime.strptime(value, "%Y-%m-%d")
 
 
 class UserResource(Resource):

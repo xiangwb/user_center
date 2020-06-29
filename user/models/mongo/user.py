@@ -16,7 +16,7 @@ class User(CommonDocument, SearchableMixin):
     gender = mongo.StringField(choices=['F', 'M', ''], default='')
     weixin = mongo.StringField(default='', max_length=64)
     qq = mongo.StringField(default='', max_length=64)
-    birthday = mongo.DateField(required=False, default='')
+    birthday = mongo.DateField(required=False)
     country = mongo.StringField(required=False, max_length=128, default='')  # 国家
     city = mongo.StringField(required=False, max_length=128, default='')  # 城市
     graduated_school = mongo.StringField(required=False, max_length=128)  # 毕业学校
