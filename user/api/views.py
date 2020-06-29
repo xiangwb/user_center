@@ -12,7 +12,7 @@ api = Api(blueprint)
 
 
 api.add_resource(UserResource, "/users/<string:username>")
-api.add_resource(UserList, "/users")
+api.add_resource(UserList, "/users/")
 
 
 @blueprint.before_app_first_request

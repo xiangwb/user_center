@@ -15,18 +15,18 @@ This example is heavily inspired by
 https://github.com/vimalloc/flask-jwt-extended/blob/master/examples/database_blacklist/
 """
 from user.models.mongo import CommonDocument
-import mongoengine as mg
+import mongoengine as mongo
 
 
 class TokenBlacklist(CommonDocument):
     """Blacklist representation
     """
 
-    jti = mg.StringField(required=True, max_length=36, unique=True)
-    token_type = mg.StringField(required=True, max_length=10)
-    user_id = mg.StringField(required=True, max_length=36)  # 相当于用户的外键
-    revoked = mg.BooleanField(required=True)
-    expires = mg.DateTimeField(required=True)
+    jti = mongo.StringField(required=True, max_length=36, unique=True)
+    token_type = mongo.StringField(required=True, max_length=10)
+    user_id = mongo.StringField(required=True, max_length=36)  # 相当于用户的外键
+    revoked = mongo.BooleanField(required=True)
+    expires = mongo.DateTimeField(required=True)
 
     def to_dict(self):
         return {
