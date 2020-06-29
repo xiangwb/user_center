@@ -93,3 +93,4 @@ ENV/
 celerybeat.pid
 celerybeat-schedule
 /.envs/
+.flaskenv
