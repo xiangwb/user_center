@@ -12,18 +12,18 @@ class UserSchema(ma.Schema):
     id = ma.String(dump_only=True)
     password = ma.String(load_only=True, required=True)
     username = ma.String(required=True)
-    email = ma.String(required=False)
-    phone = ma.String(required=False)
+    email = ma.String(required=False, default='')
+    phone = ma.String(required=False, default='')
     # roles = ma.List(required=False)
-    gender = ma.String(required=False)
-    weixin = ma.String(required=False)
-    qq = ma.String(required=False)
-    birthday = ma.Date(required=False)
-    country = ma.String(required=False)  # 国家
-    city = ma.String(required=False)  # 城市
-    graduated_school = ma.String(required=False)  # 毕业学校
-    company = ma.String(required=False)  # 就职公司
-    title = ma.String(required=False)  # 职位
+    gender = ma.String(required=False, default='')
+    weixin = ma.String(required=False, default='')
+    qq = ma.String(required=False, default='')
+    birthday = ma.Date(required=False, default='')
+    country = ma.String(required=False, default='')  # 国家
+    city = ma.String(required=False, default='')  # 城市
+    graduated_school = ma.String(required=False, default='')  # 毕业学校
+    company = ma.String(required=False, default='')  # 就职公司
+    title = ma.String(required=False, default='')  # 职位
 
 
 class UserResource(Resource):
