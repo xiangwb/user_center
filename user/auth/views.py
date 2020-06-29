@@ -12,6 +12,7 @@ from user.auth.helpers import revoke_token, is_token_revoked, add_token_to_datab
 from user.extensions import pwd_context, jwt, apispec
 from user.loggers import get_logger
 from user.models import User
+from utils.response import format_response
 
 logger = get_logger('user', 'user')
 
@@ -58,17 +59,20 @@ def login():
       security: []
     """
     if not request.is_json:
-        return jsonify({"msg": "Missing JSON in request"}), 400
+        # return jsonify({"msg": "Missing JSON in request"}), 400
+        return jsonify(format_response('', 'Missing JSON in request', 400))
 
     username = request.json.get("username", None)
     password = request.json.get("password", None)
     if not username or not password:
-        return jsonify({"msg": "Missing username or password"}), 400
+        # return jsonify({"msg": "Missing username or password"}), 400
+        return jsonify(format_response('', 'Missing username or password', 400))
 
     user = User.objects.filter(username=username).first()
     logger.debug("user:{}".format(user))
     if user is None or not pwd_context.verify(password, user.password):
-        return jsonify({"msg": "Bad credentials"}), 400
+        # return jsonify({"msg": "Bad credentials"}), 400
+        return jsonify(format_response('', 'Bad credentials', 400))
 
     access_token = create_access_token(identity=user.id)
     refresh_token = create_refresh_token(identity=user.id)
@@ -76,7 +80,8 @@ def login():
     add_token_to_database(refresh_token, app.config["JWT_IDENTITY_CLAIM"])
 
     ret = {"access_token": access_token, "refresh_token": refresh_token}
-    return jsonify(ret), 200
+    # return jsonify(ret), 200
+    return jsonify(format_response(ret, 'login success', 200))
 
 
 @blueprint.route("/refresh/", methods=["POST"])
@@ -112,7 +117,7 @@ def refresh():
     access_token = create_access_token(identity=current_user)
     ret = {"access_token": access_token}
     add_token_to_database(access_token, app.config["JWT_IDENTITY_CLAIM"])
-    return jsonify(ret), 200
+    return jsonify(format_response(ret, 'refresh access token success', 200))
 
 
 @blueprint.route("/revoke_access/", methods=["DELETE"])
@@ -142,7 +147,8 @@ def revoke_access_token():
     jti = get_raw_jwt()["jti"]
     user_identity = get_jwt_identity()
     revoke_token(jti, user_identity)
-    return jsonify({"message": "token revoked"}), 200
+    # return jsonify({"message": "token revoked"}), 200
+    return jsonify(format_response('', 'revoke access token success', 200))
 
 
 @blueprint.route("/revoke_refresh/", methods=["DELETE"])
@@ -172,7 +178,8 @@ def revoke_refresh_token():
     jti = get_raw_jwt()["jti"]
     user_identity = get_jwt_identity()
     revoke_token(jti, user_identity)
-    return jsonify({"message": "token revoked"}), 200
+    # return jsonify({"message": "token revoked"}), 200
+    return jsonify(format_response('', 'revoke refresh token success', 200))
 
 
 @jwt.user_loader_callback_loader
