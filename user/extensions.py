@@ -3,6 +3,7 @@
 All extensions here are used as singletons and
 initialized in application factory
 """
+from flask import jsonify
 from passlib.context import CryptContext
 from flask_jwt_extended import JWTManager
 from flask_marshmallow import Marshmallow
@@ -28,4 +29,4 @@ limiter = Limiter(key_func=get_remote_address, default_limits=["10000/day, 2000/
 
 @jwt.unauthorized_loader
 def my_unauthorized_loader(e):
-    return format_response(e, 'Missing Authorization Header', 401)
+    return jsonify(format_response(e, 'Missing Authorization Header', 401))
