@@ -35,3 +35,8 @@ def my_unauthorized_loader(e):
 @jwt.invalid_token_loader
 def my_invalid_token_loader(e):
     return jsonify(format_response('', "Bad Authorization header. Expected value 'Bearer <JWT>'", 422))
+
+
+@jwt.expired_token_loader
+def my_expired_token_loader(e):
+    return jsonify(format_response('', "Token has expired", 401))
