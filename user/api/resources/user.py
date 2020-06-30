@@ -191,4 +191,6 @@ class UserList(Resource):
             return format_response('', 'user exists', 400)
         except Exception as e:
             # abort(500, {"msg": e.args})
+            import traceback
+            traceback.print_exc()
             return format_response('', 'server error', 500)
