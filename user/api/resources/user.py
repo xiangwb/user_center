@@ -117,14 +117,16 @@ class UserResource(Resource):
             user.reload()
             return {"msg": "user updated", "user": schema.dump(user)}
         except (mg.DoesNotExist, mg.MultipleObjectsReturned):
-            abort(404, {'msg': '用户不存在'})
+            # abort(404, {'msg': '用户不存在'})
+            return format_response('', 'user is not exist', 404)
 
     def delete(self, id):
         try:
             User.objects.get(id=id).delete()
             return {"msg": "user deleted"}
         except (mg.DoesNotExist, mg.MultipleObjectsReturned):
-            abort(404, {'msg': '用户不存在'})
+            # abort(404, {'msg': '用户不存在'})
+            return format_response('', 'user is not exist', 404)
 
 
 class UserList(Resource):
