@@ -5,7 +5,7 @@ from flask_jwt_extended import jwt_required
 
 import mongoengine as mg
 from user.models import User
-from user.extensions import ma
+from user.extensions import ma, logger
 from user.commons.pagination import Pagination
 from user.utils.response import format_response
 
@@ -193,4 +193,5 @@ class UserList(Resource):
             # abort(500, {"msg": e.args})
             import traceback
             traceback.print_exc()
+            logger.api_logger.error(traceback.format_exc())
             return format_response('', 'server error', 500)
