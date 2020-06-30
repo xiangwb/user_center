@@ -112,6 +112,6 @@ def init_celery(app=None):
 
 def init_admin(app=None):
     app = app or create_app()
-    admin = Admin(app, name='bubble', template_mode='bootstrap3')
+    admin = Admin(app, name='user_center', template_mode='bootstrap3')
     admin.add_view(ModelView(User))
     admin.add_view(ModelView(TokenBlacklist))

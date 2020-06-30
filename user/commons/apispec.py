@@ -40,7 +40,7 @@ class APISpecExt:
             self.init_app(app, **kwargs)
 
     def init_app(self, app, **kwargs):
-        app.config.setdefault("APISPEC_TITLE", "bubble")
+        app.config.setdefault("APISPEC_TITLE", "user_center")
         app.config.setdefault("APISPEC_VERSION", "1.0.0")
         app.config.setdefault("OPENAPI_VERSION", "3.0.2")
         app.config.setdefault("SWAGGER_JSON_URL", "/swagger.json")
