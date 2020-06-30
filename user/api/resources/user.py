@@ -187,6 +187,9 @@ class UserList(Resource):
             # return {"msg": "user created", "user": schema.dump(user)}, 201
             return format_response(schema.dump(user), 'user created', 201)
         except mongoengine.errors.NotUniqueError:
+            import traceback
+            traceback.print_exc()
+            logger.api_logger.error(traceback.format_exc())
             # abort(403, {'msg': '手机号码已存在'})
             return format_response('', 'user exists', 400)
         except Exception as e:
