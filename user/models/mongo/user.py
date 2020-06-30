@@ -8,7 +8,7 @@ class User(CommonDocument, SearchableMixin):
     """
     # 基础字段
     username = mongo.StringField(required=True, max_length=100, unique=True)
-    email = mongo.StringField(required=False, max_length=80)
+    email = mongo.StringField(required=False, max_length=80, default='')
     password = mongo.StringField(required=True, max_length=255)
     active = mongo.BooleanField(default=True)
     phone = mongo.StringField(max_length=16, unique=True, required=False, default='')
@@ -19,7 +19,7 @@ class User(CommonDocument, SearchableMixin):
     birthday = mongo.DateField(required=False)
     country = mongo.StringField(required=False, max_length=128, default='')  # 国家
     city = mongo.StringField(required=False, max_length=128, default='')  # 城市
-    graduated_school = mongo.StringField(required=False, max_length=128)  # 毕业学校
+    graduated_school = mongo.StringField(required=False, max_length=128, default='')  # 毕业学校
     company = mongo.StringField(required=False, max_length=128, default='')  # 就职公司
     title = mongo.StringField(required=False, max_length=64, default='')  # 职位
 
