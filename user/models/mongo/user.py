@@ -13,7 +13,7 @@ class User(CommonDocument, SearchableMixin):
     email = mongo.StringField(required=False, max_length=80, default='')
     password = mongo.StringField(required=True, max_length=255)
     active = mongo.BooleanField(default=True)
-    phone = mongo.StringField(max_length=16,required=False, default='')
+    phone = mongo.StringField(max_length=16, required=False, default='')
     # roles = mongo.ListField()
     gender = mongo.StringField(choices=['F', 'M', ''], default='')
     weixin = mongo.StringField(default='', max_length=64)
