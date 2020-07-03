@@ -174,10 +174,13 @@ class UserList(Resource):
     method_decorators = {"get": [jwt_required]}
 
     def get(self):
-        schema = UserSchema(many=True)
-        query = User.objects.all()
-        objs, page = Pagination(query).paginate(schema)
-        return format_response(objs, 'get user list success', 200, page=page)
+        try:
+            schema = UserSchema(many=True)
+            query = User.objects.all()
+            objs, page = Pagination(query).paginate(schema)
+            return format_response(objs, 'get user list success', 200, page=page)
+        except Exception as e:
+            return format_response(e.args, 'get user list failure', 500)
 
     def post(self):
         try:

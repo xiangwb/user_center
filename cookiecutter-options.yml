@@ -1,5 +1,5 @@
 default_context:
-    project_name: "bubble"
+    project_name: "user_center"
     app_name: "user"
     python_version: "3.8"
     admin_user_username: "admin"
