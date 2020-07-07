@@ -25,7 +25,7 @@ services:
       - "traefik.http.routers.apw.rule=PathPrefix(`/api/v1/user_center`)"
       - "traefik.http.middlewares.user_center.forwardauth.address=http://192.168.112.128/api/v1/user_center/auth/"
       - "traefik.http.middlewares.user_center.forwardauth.authResponseHeaders=X-Auth-User-Id, X-Auth-User-Name"
-      - "traefik.http.routers.user_center.middlewares=user_center@flask@docker"
+      - "traefik.http.routers.user_center.middlewares=user_center@docker"
     volumes:
       - ./user:/code/user
       - ./db/:/db/
