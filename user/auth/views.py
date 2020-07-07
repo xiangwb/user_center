@@ -182,6 +182,33 @@ def revoke_refresh_token():
     return jsonify(format_response('', 'revoke refresh token success', 200))
 
 
+@blueprint.route("/auth/", methods=["GET"])
+@jwt_required
+def auth():
+    """auth for api gateway
+
+    ---
+    get:
+      tags:
+        - auth
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        400:
+          description: bad request
+        401:
+          description: unauthorized
+    """
+    # return jsonify({"message": "token revoked"}), 200
+    return jsonify(format_response('', 'auth success', 200))
+
+
 @jwt.user_loader_callback_loader
 def user_loader_callback(identity):
     return User.objects.get(id=identity)
