@@ -7,7 +7,7 @@ from user.api.resources import UserResource, UserList
 from user.api.resources.user import UserSchema
 
 
-blueprint = Blueprint("api", __name__, url_prefix="/api/v1")
+blueprint = Blueprint("api", __name__, url_prefix="/api/v1/user_center")
 api = Api(blueprint)
 
 

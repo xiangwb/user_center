@@ -16,7 +16,7 @@ from user.utils.response import format_response
 
 logger = get_logger('user', 'user')
 
-blueprint = Blueprint("auth", __name__, url_prefix="/api/v1")
+blueprint = Blueprint("auth", __name__, url_prefix="/api/v1/user_center")
 
 
 @blueprint.route("/login/", methods=["POST"])
