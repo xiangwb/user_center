@@ -5,7 +5,7 @@ networks:
   private:
   public:
     external:
-      name: bubble_bubble
+      name: bubble_infrastructure_bubble
 
 services:
   web:
