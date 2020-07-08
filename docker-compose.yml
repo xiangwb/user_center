@@ -23,8 +23,6 @@ services:
       - "traefik.docker.network=bubble_infrastructure_bubble"
       - "traefik.http.services.service0.loadbalancer.server.port=5000"
       - "traefik.http.routers.user.rule=PathPrefix(`/api/v1/user_center`)"
-#      - "traefik.http.middlewares.user.forwardauth.address=http://192.168.112.128/api/v1/user_center/auth/"
-#      - "traefik.http.middlewares.user.forwardauth.authResponseHeaders=X-Auth-User-Id, X-Auth-User-Name"
       - "traefik.http.routers.user.middlewares=user@docker"
     volumes:
       - ./user:/code/user
