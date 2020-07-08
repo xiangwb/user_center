@@ -41,7 +41,7 @@ def handle_400(e):
     # if isinstance(e.description, dict):
     #     rsp.update(e.description)
     # # return jsonify(**rsp), 400
-    return format_response(str(e), 'bad request', 400)
+    return format_response(str(e), 'bad request', 400), 400
 
 
 def handle_401(e):
@@ -57,7 +57,7 @@ def handle_401(e):
     # elif isinstance(e.description, dict):
     #     rsp.update(e.description)
     # return jsonify(**rsp), 401
-    return format_response(str(e), 'Unauthorized', 401)
+    return format_response(str(e), 'Unauthorized', 401), 401
 
 
 def handle_403(e):
@@ -73,7 +73,7 @@ def handle_403(e):
     # if isinstance(e.description, dict):
     #     rsp.update(e.description)
     # return jsonify(**rsp), 403
-    return format_response(str(e), 'Forbidden', 403)
+    return format_response(str(e), 'Forbidden', 403), 403
 
 
 def handle_404(e):
