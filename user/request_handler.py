@@ -14,6 +14,8 @@
 """
 import traceback
 
+from flask import jsonify
+
 from user.extensions import logger
 from user.utils.response import format_response
 
@@ -41,7 +43,7 @@ def handle_400(e):
     # if isinstance(e.description, dict):
     #     rsp.update(e.description)
     # # return jsonify(**rsp), 400
-    return format_response(str(e), 'bad request', 400), 400
+    return jsonify(format_response(str(e), 'bad request', 400)), 400
 
 
 def handle_401(e):
@@ -87,7 +89,7 @@ def handle_404(e):
     # if isinstance(e.description, dict):
     #     rsp.update(e.description)
     # return jsonify(**rsp), 404
-    return format_response(str(e), 'Not Found', 404)
+    return jsonify(format_response(str(e), 'Not Found', 404)),404
 
 
 def handle_405(e):
