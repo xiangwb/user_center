@@ -1,4 +1,4 @@
-from flask import request, jsonify, Blueprint, current_app as app
+from flask import request, jsonify, Blueprint, current_app as app, make_response
 from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
@@ -206,7 +206,10 @@ def auth():
           description: unauthorized
     """
     # return jsonify({"message": "token revoked"}), 200
-    return jsonify(format_response('', 'auth success', 200))
+    user_id = get_jwt_identity()
+    resp = make_response(format_response('', 'auth success', 200), 200)
+    resp.headers.extend({"X-Auth-User-Id": user_id})
+    return resp
 
 
 @jwt.user_loader_callback_loader
