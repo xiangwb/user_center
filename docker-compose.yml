@@ -37,6 +37,9 @@ services:
 
   redis:
     image: redis
+    networks:
+      - private
+      - public
   celery:
     image: user
     command: "celery worker -A user.celery_app:app"
