@@ -209,7 +209,7 @@ def auth():
     user_id = get_jwt_identity()
     resp = make_response(format_response('', 'auth success', 200), 200)
     resp.headers.extend({"X-Auth-User-Id": user_id})
-    return resp
+    return jsonify(resp)
 
 
 @jwt.user_loader_callback_loader
