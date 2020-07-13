@@ -207,9 +207,9 @@ def auth():
     """
     # return jsonify({"message": "token revoked"}), 200
     user_id = get_jwt_identity()
-    resp = make_response(format_response('', 'auth success', 200), 200)
+    resp = make_response(jsonify(format_response('', 'auth success', 200), 200))
     resp.headers.extend({"X-Auth-User-Id": user_id})
-    return jsonify(resp)
+    return resp
 
 
 @jwt.user_loader_callback_loader
