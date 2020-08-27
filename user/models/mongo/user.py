@@ -16,6 +16,7 @@ class User(CommonDocument, SearchableMixin):
     phone = mongo.StringField(max_length=16, required=False, default='')
     # roles = mongo.ListField()
     gender = mongo.StringField(choices=['F', 'M', ''], default='')
+    avatar = mongo.StringField(default='', max_length=512)
     weixin = mongo.StringField(default='', max_length=64)
     qq = mongo.StringField(default='', max_length=64)
     birthday = mongo.DateField(required=False, default=date(1, 1, 1))

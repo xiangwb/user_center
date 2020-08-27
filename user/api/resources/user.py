@@ -17,6 +17,7 @@ class UserSchema(ma.Schema):
     email = ma.String(default='')
     phone = ma.String(default='')
     # roles = ma.List(required=False)
+    avatar = ma.string(default='')
     gender = ma.String(default='')
     weixin = ma.String(default='')
     qq = ma.String(default='')
