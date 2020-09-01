@@ -9,11 +9,11 @@ service UserService {
 // The request message containing the user's name.
 message GetUserReply {
   string user_id = 1;
-  string username = 1;
-  string graduated_school =1;
-  string company = 1;
-  string title =1;
-  string brief = 1;
+  string username = 2;
+  string graduated_school =3;
+  string company = 4;
+  string title =5;
+  string brief = 6;
 }
 
 // The response message containing the greetings
