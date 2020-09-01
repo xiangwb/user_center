@@ -1,3 +1,5 @@
+syntax = "proto3";
+package user;
 // The greeting service definition.
 service UserService {
   // Sends a greeting
