@@ -25,6 +25,7 @@ class User(CommonDocument, SearchableMixin):
     graduated_school = mongo.StringField(required=False, max_length=128, default='')  # 毕业学校
     company = mongo.StringField(required=False, max_length=128, default='')  # 就职公司
     title = mongo.StringField(required=False, max_length=64, default='')  # 职位
+    brief = mongo.StringField(required=False, max_length=1024, default='')
 
     # __searchable__ = ['username', 'email']  # 定义需要es搜索的字段，不定义则不需要es搜索功能
 

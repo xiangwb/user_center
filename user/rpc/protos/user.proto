@@ -1,0 +1,20 @@
+// The greeting service definition.
+service UserService {
+  // Sends a greeting
+  rpc GetUserByID (GetUserRequest) returns (GetUserReply) {}
+}
+
+// The request message containing the user's name.
+message GetUserReply {
+  string user_id = 1;
+  string username = 1;
+  string graduated_school =1;
+  string company = 1;
+  string title =1;
+  string brief = 1;
+}
+
+// The response message containing the greetings
+message GetUserRequest {
+  string user_id = 1;
+}
