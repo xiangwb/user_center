@@ -202,3 +202,82 @@ class UserList(Resource):
             traceback.print_exc()
             logger.api_logger.error(traceback.format_exc())
             return format_response('', 'server error', 500)
+
+
+class InternalUserResource(Resource):
+    """Single object resource
+
+    ---
+    get:
+      tags:
+        - api
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user: UserSchema
+        404:
+          description: user does not exists
+    put:
+      tags:
+        - api
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              UserSchema
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: user updated
+                  user: UserSchema
+        404:
+          description: user does not exists
+    delete:
+      tags:
+        - api
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: user deleted
+        404:
+          description: user does not exists
+    """
+
+    def get(self, id):
+        schema = UserSchema()
+        try:
+            user = User.objects.get(id=id)
+            return format_response(schema.dump(user), "get user detail success", 200)
+        except (mg.DoesNotExist, mg.MultipleObjectsReturned):
+            return format_response('', 'user is not exist', 404)

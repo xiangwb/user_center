@@ -4,7 +4,7 @@ from marshmallow import ValidationError
 
 from user.extensions import apispec
 from user.api.resources import UserResource, UserList, InternalUserResource
-from user.api.resources.user.external import UserSchema
+from user.api.resources.user import UserSchema
 
 blueprint = Blueprint("api", __name__, url_prefix="/api/v1/user_center")
 api = Api(blueprint)
@@ -19,6 +19,7 @@ def register_views():
     apispec.spec.components.schema("UserSchema", schema=UserSchema)
     apispec.spec.path(view=UserResource, app=current_app)
     apispec.spec.path(view=UserList, app=current_app)
+    apispec.spec.path(view=InternalUserResource, app=current_app)
 
 
 @blueprint.errorhandler(ValidationError)

@@ -1,4 +1,3 @@
-from user.api.resources.user.external import UserResource, UserList
-from user.api.resources.user.internal import InternalUserResource
+from user.api.resources.user import UserResource, UserList, InternalUserResource
 
 __all__ = ["UserResource", "UserList", "InternalUserResource"]
