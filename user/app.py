@@ -3,9 +3,11 @@ from flask_admin import Admin
 
 from user import auth, api
 from user.extensions import jwt, db, apispec, logger, celery, limiter
+from user.loggers import get_logger
 from user.models import User, TokenBlacklist
 from user.request_handler import register_error_handler
 from flask_admin.contrib.mongoengine import ModelView
+log = get_logger('app', 'app')
 
 
 def create_app(testing=False, cli=False):
@@ -23,6 +25,8 @@ def create_app(testing=False, cli=False):
     register_blueprints(app)
     init_celery(app)
     init_admin(app)
+    log.debug("url列表")
+    log.debug(app.url_map)
 
     return app
 
