@@ -25,7 +25,7 @@ class UserSchema(ma.Schema):
     title = ma.String(default='')  # 职位
 
 
-class UserResource(Resource):
+class InternalUserResource(Resource):
     """Single object resource
 
     ---
