@@ -3,16 +3,15 @@ from flask_restful import Api
 from marshmallow import ValidationError
 
 from user.extensions import apispec
-from user.api.resources import UserResource, UserList
-from user.api.resources.user import UserSchema
-
+from user.api.resources import UserResource, UserList, InternalUserResource
+from user.api.resources.user.external import UserSchema
 
 blueprint = Blueprint("api", __name__, url_prefix="/api/v1/user_center")
 api = Api(blueprint)
 
-
 api.add_resource(UserResource, "/users/<string:id>")
 api.add_resource(UserList, "/users/")
+api.add_resource(InternalUserResource, '/internal/users/<string:id>')
 
 
 @blueprint.before_app_first_request
