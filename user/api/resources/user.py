@@ -27,6 +27,18 @@ class UserSchema(ma.Schema):
     graduated_school = ma.String(default='')  # 毕业学校
     company = ma.String(default='')  # 就职公司
     title = ma.String(default='')  # 职位
+    brief = ma.String(defalut='')  # 个人介绍
+
+
+class InternalUserSchema(ma.Schema):
+    id = ma.String(dump_only=True)
+    username = ma.String(required=True)
+    avatar = ma.String(default='')
+    gender = ma.String(default='')
+    graduated_school = ma.String(default='')  # 毕业学校
+    company = ma.String(default='')  # 就职公司
+    title = ma.String(default='')  # 职位
+    brief = ma.String(defalut='')  # 个人介绍
 
 
 class UserResource(Resource):
@@ -275,7 +287,7 @@ class InternalUserResource(Resource):
     """
 
     def get(self, id):
-        schema = UserSchema()
+        schema = InternalUserSchema()
         try:
             user = User.objects.get(id=id)
             return format_response(schema.dump(user), "get user detail success", 200)
